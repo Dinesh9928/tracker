@@ -24,14 +24,6 @@
         h1, h2 {
             color: #444;
         }
-        .tracker-image {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .tracker-image img {
-            max-width: 100%;
-            border-radius: 8px;
-        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -57,20 +49,22 @@
             background: #f9f9f9;
             border: 1px solid #ddd;
             border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         .task-list li.completed {
             text-decoration: line-through;
             color: #999;
         }
-        .links {
-            margin: 20px 0;
+        .task-list input[type="checkbox"] {
+            margin-right: 10px;
         }
-        .links a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        .links a:hover {
-            text-decoration: underline;
+        .dropdown {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
         }
     </style>
 </head>
@@ -79,10 +73,6 @@
         <h1>Data Science Learning Tracker</h1>
         <p><strong>Total Duration:</strong> <em>6 Months 🐍</em></p>
         <p><strong>Daily Schedule:</strong> 3 hours on Tool Skills + 1 hour on Core Skills = 4 hours/day</p>
-
-        <div class="tracker-image">
-            <img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/8db5baab-95af-4e5d-a0dc-58c7aa48be11/a26252f4-202d-447a-9229-d273eaa181ac/Picture1.jpg" alt="Learning Tracker">
-        </div>
 
         <h2>Weekly Progress</h2>
         <table>
@@ -96,13 +86,25 @@
                 <td>Week 1</td>
                 <td>YYYY-MM-DD</td>
                 <td>YYYY-MM-DD</td>
-                <td>Not Started</td>
+                <td>
+                    <select class="dropdown" onchange="updateProgress()">
+                        <option value="Not Started">Not Started</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>Week 2</td>
                 <td>YYYY-MM-DD</td>
                 <td>YYYY-MM-DD</td>
-                <td>Not Started</td>
+                <td>
+                    <select class="dropdown" onchange="updateProgress()">
+                        <option value="Not Started">Not Started</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </td>
             </tr>
             <!-- Add more weeks as needed -->
         </table>
@@ -110,28 +112,49 @@
         <h2>Weekly Task View</h2>
         <h3>Week 1 Tasks</h3>
         <ul class="task-list">
-            <li>Complete Introduction to Python</li>
-            <li>Set up Python environment (Anaconda/Jupyter)</li>
-            <li>Practice basic Python programming (variables, loops, conditions)</li>
-            <li>Learn about Core Skill 1 (e.g., Problem-solving, Communication)</li>
+            <li>
+                <input type="checkbox" onchange="toggleTask(this)"> Complete Introduction to Python
+            </li>
+            <li>
+                <input type="checkbox" onchange="toggleTask(this)"> Set up Python environment (Anaconda/Jupyter)
+            </li>
+            <li>
+                <input type="checkbox" onchange="toggleTask(this)"> Practice basic Python programming (variables, loops, conditions)
+            </li>
+            <li>
+                <input type="checkbox" onchange="toggleTask(this)"> Learn about Core Skill 1 (e.g., Problem-solving, Communication)
+            </li>
         </ul>
 
         <h3>Week 2 Tasks</h3>
         <ul class="task-list">
-            <li>Learn NumPy basics (arrays, operations, indexing)</li>
-            <li>Introduction to Pandas (dataframes, basic operations)</li>
-            <li>Study Core Skill 2 (e.g., Critical thinking, Collaboration)</li>
+            <li>
+                <input type="checkbox" onchange="toggleTask(this)"> Learn NumPy basics (arrays, operations, indexing)
+            </li>
+            <li>
+                <input type="checkbox" onchange="toggleTask(this)"> Introduction to Pandas (dataframes, basic operations)
+            </li>
+            <li>
+                <input type="checkbox" onchange="toggleTask(this)"> Study Core Skill 2 (e.g., Critical thinking, Collaboration)
+            </li>
         </ul>
 
         <!-- Add more weeks and tasks as needed -->
-
-        <div class="links">
-            <p><strong>Useful Links:</strong></p>
-            <ul>
-                <li><a href="https://www.notion.so/22dc1a741b144cb88e331c6c9f829299?pvs=21" target="_blank">Weekly Progress View</a></li>
-                <li><a href="https://www.notion.so/82bec2f12a5e4475b579156adb4939bc?pvs=21" target="_blank">Weekly Task View</a></li>
-            </ul>
-        </div>
     </div>
+
+    <script>
+        function toggleTask(checkbox) {
+            const listItem = checkbox.parentElement;
+            if (checkbox.checked) {
+                listItem.classList.add('completed');
+            } else {
+                listItem.classList.remove('completed');
+            }
+        }
+
+        function updateProgress() {
+            console.log("Progress updated! Implement more logic if needed.");
+        }
+    </script>
 </body>
 </html>
